@@ -66,8 +66,8 @@ class Queue {
             }
         }
 
-        int peek() {
-            return this->items[this->front];
+        void peek() {
+            std::cout << "Front item: " << this->items[this->front] << std::endl;
         }
 
         void display() {
@@ -109,6 +109,9 @@ int main() {
 
     // Now we have just 4 elements
     queue.display();
+
+    // Peek front
+    queue.peek();
 
     return 0;
 }
