@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Deklarasi singly linked list
+// Deklarasi single linked list
 struct Buku{
     // Komponen/member
     string judul, pengarang;
@@ -13,43 +13,126 @@ struct Buku{
     Buku *next;
 };
 
-int main() {
-    // Init singly linked list
-    Buku *node1, *node2, *node3;
+Buku *head, *tail, *current, *newNode, *del;
 
-    // Instance struct
-    node1 = (Buku*) malloc(sizeof(Buku));
-    node2 = new Buku();
-    node3 = new Buku();
+// Init single linked list
+void createSingleLinkedList(string judul, string pengarang, int tahunTerbit) {
+    head = new Buku();
+    head->judul = judul;
+    head->pengarang = pengarang;
+    head->tahunTerbit = tahunTerbit;
+    head->next = nullptr;
+    tail = head;
+}
 
-    // Pengisian node 1
-    node1->judul = "Matematika";
-    node1->pengarang = "Ahli Matematika";
-    node1->tahunTerbit = 1995;
-    node1->next = node2;
+// Tambah node di awal linked list
+void addFirst(string judul, string pengarang, int tahunTerbit) {
+    newNode = new Buku();
+    newNode->judul = judul;
+    newNode->pengarang = pengarang;
+    newNode->tahunTerbit = tahunTerbit;
+    newNode->next = head;
+    head = newNode;
+}
 
-    // Pengisian node 2
-    node2->judul = "Dia adalah Kakakku";
-    node2->pengarang = "Tere Liye";
-    node2->tahunTerbit = 2009;
-    node2->next = node3;
+// Tambah node di awal linked list
+void addLast(string judul, string pengarang, int tahunTerbit) {
+    newNode = new Buku();
+    newNode->judul = judul;
+    newNode->pengarang = pengarang;
+    newNode->tahunTerbit = tahunTerbit;
+    newNode->next = nullptr;
+    tail->next = newNode;
+    tail = newNode;
+}
 
-    // Pengisian node 3
-    node3->judul = "Kata";
-    node3->pengarang = "Geez & Aan";
-    node3->tahunTerbit = 2018;
-    node3->next = nullptr;
+// Remove first
+void removeFirst() {
+    del = head;
+    head = head->next;
+    delete del;
+}
 
-    // Print singly linked list
-    Buku *current;
-    current = node1;
+// Remove last
+void removeLast() {
+    del = tail;
+    current = head;
+    while (current->next != tail) {
+        current = current->next;
+    }
+    tail = current;
+    tail->next = nullptr;
+    delete del;
+}
+
+// Ubah nilai di node awal linked list
+void changeFirst(string judul, string pengarang, int tahunTerbit) {
+    head->judul = judul;
+    head->pengarang = pengarang;
+    head->tahunTerbit = tahunTerbit;
+}
+
+// Ubah nilai di node awal linked list
+void changeLast(string judul, string pengarang, int tahunTerbit) {
+    tail->judul = judul;
+    tail->pengarang = pengarang;
+    tail->tahunTerbit = tahunTerbit;
+}
+
+// Print single linked list
+void printSingleLinkedList(){
+    current = head;
     while (current != nullptr) {
         cout << "Judul Buku: " << current->judul << endl;
         cout << "Pengarang: " << current->pengarang << endl;
-        cout << "Tahun Terbit Buku: " << current->pengarang << endl;
-
+        cout << "Tahun Terbit Buku: " << current->tahunTerbit << endl;
+        cout << endl;
         current = current->next;
     }
+}
+
+int main() {
+    // Init linked list
+    cout << "Inisialisasi linked list:" << endl;
+    createSingleLinkedList("Kata", "Geez & Aan", 2018);
+    printSingleLinkedList();
+    cout << endl;
+    
+    // Insert element to first node
+    cout << "Menambahkan node baru di kiri:" << endl;
+    addFirst("Dia adalah Kakakku", "Tere Liye", 2009);
+    printSingleLinkedList();
+    cout << endl << endl;
+
+    // Insert element to last node
+    cout << "Menambahkan node baru di kanan:" << endl;
+    addLast("Aroma Karsa", "Dee Lestari", 2018);
+    printSingleLinkedList();
+    cout << endl << endl;
+
+    // Delete first node
+    cout << "Menghapus node awal:" << endl;
+    removeFirst();
+    printSingleLinkedList();
+    cout << endl << endl;
+
+    // Insert element to last node
+    cout << "Menambahkan node baru di kanan:" << endl;
+    addLast("11.11", "Fiersa Besari", 2018);
+    printSingleLinkedList();
+    cout << endl << endl;
+
+    // Delete last node
+    cout << "Menghapus node akhir:" << endl;
+    removeLast();
+    printSingleLinkedList();
+    cout << endl << endl;
+
+    // Insert element to last node
+    cout << "Mengubah nilai node pertama:" << endl;
+    changeFirst("Berhenti di Kamu", "Gia Pratama", 2018);
+    printSingleLinkedList();
+    cout << endl << endl;
 
     return 0;
-}
+};
