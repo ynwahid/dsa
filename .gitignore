@@ -1,3 +1,10 @@
-bin/
-.vscode
-src/__pycache__
+# bin/
+# .vscode
+# src/__pycache__
+
+# Ignore all
+*
+
+# Unignore file with particular extensions
+!*.cpp
+!*.py
